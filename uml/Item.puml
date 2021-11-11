@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Item{
+String description;
+LocalDate time;
+boolean complete;
+public void setTime(String someTime)
+public String getDescription()
+public String getDate()
+public void setDescription(String descr)
+public void setComplete()
+public void setIncomplete()
+}
+@enduml

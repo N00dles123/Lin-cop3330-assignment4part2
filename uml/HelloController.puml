@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class HelloController{
+private TableView<String> options
+private Label welcomeText
+private VBox box
+private Label listName
+private TextField field
+private Button submitbutton
+private Button uploadList
+private TableColumn<Item, String> complete
+private TableColumn<Item, String> task
+private TableColumn<Item, String> date
+private TableView<String> listTable
+private Button finish
+private TextField taskField
+private Label taskLabel
+private HBox listBox
+private Button hello
+ArrayList<ToDo> masterList
+protected void onHelloButtonClick()
+protected void OnButtonClick()
+protected void onSubmitClick()
+protected void onFinishClick()
+}
+@enduml
