@@ -7,10 +7,14 @@ import java.util.*;
 import java.io.*;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import ucf.assignments.Item;
 import ucf.assignments.ToDo;
 
@@ -49,7 +53,7 @@ public class HelloController{
     private Button hello;
 
     //This will manage all the ToDo Lists
-    ArrayList<ToDo> masterList = new ArrayList<>();
+    //ArrayList<ToDo> masterList = new ArrayList<>();
 
     @FXML
     protected void onHelloButtonClick(){
@@ -57,7 +61,11 @@ public class HelloController{
         This will prompt the user to create a new list
         asking for the list name first
          */
-
+        listName.setVisible(true);
+        field.setVisible(true);
+        submitbutton.setVisible(true);
+        uploadList.setVisible(false);
+        hello.setVisible(false);
     }
     @FXML
     protected void OnButtonClick(){
@@ -86,5 +94,18 @@ public class HelloController{
         and afterwards list is finished displaying a finished list
         this function is to end the addition of more items to the list
          */
+    }
+    @FXML
+    protected void onHelpClick(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloController.class.getResource("help.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Help");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }catch (Exception e){
+            System.out.println("not working");
+        }
     }
 }

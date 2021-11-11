@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.lincop3330assignment4.HelloController">
+<VBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.lincop3330assignment4.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -30,7 +30,8 @@
       <children>
       
           <Button fx:id="hello" onAction="#onHelloButtonClick" text="Create new List" />
-         <Button fx:id="uploadList" mnemonicParsing="false" onAction="#OnButtonClick" text="View Old Lists" />
+         <Button fx:id="uploadList" mnemonicParsing="false" onAction="#OnButtonClick" text="View Old List" />
+         <Button mnemonicParsing="false" onAction="#onHelpClick" text="Help" />
          <Button mnemonicParsing="false" text="Delete" visible="false" />
       </children>
    </HBox>
