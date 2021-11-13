@@ -8,5 +8,6 @@ module ucf.assignments {
 
 
     opens ucf.assignments.lincop3330assignment4 to javafx.fxml;
+    opens ucf.assignments to javafx.base;
     exports ucf.assignments.lincop3330assignment4;
 }

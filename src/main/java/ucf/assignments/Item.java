@@ -3,19 +3,31 @@ package ucf.assignments;
  *  UCF COP3330 Fall 2021 Assignment 4 Solution
  *  Copyright 2021 Jason Lin
  */
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Item {
-    String description;
-    LocalDate time;
-    boolean complete;
-    public Item(String description, String time, boolean complete){
+    private String description;
+    private Date time;
+    private boolean complete;
+    public Item(String description, String time, boolean complete) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         this.description = description;
-        this.time = LocalDate.parse(time);
+        this.time = formatter.parse(time);
         this.complete = complete;
     }
-    public void setTime(String someTime){
-        time = LocalDate.parse(someTime);
+    public Item(String description, String time) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        this.description = description;
+        this.time = formatter.parse(time);
+        this.complete = false;
+    }
+    public void setTime(String someTime) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        this.time = formatter.parse(someTime);
         /*
         sets time or due date of the Item
         also allows to change the due date of the item
@@ -28,27 +40,38 @@ public class Item {
          */
         return description;
     }
-    public String getDate(){
+    public String getTime(){
         /*
         This function will get the LocalDate object and covert it to a string
         in YYYY-MM-DD format
          */
-        return "";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String day = dateFormat.format(this.time);
+        return day;
     }
     public void setDescription(String descr){
+        this.description = descr;
         /*
         This function will set or change the description of the Item
          */
     }
     public void setComplete(){
+        this.complete = true;
         /*
         This function will make the Item complete on the ToDo List
          */
     }
     public void setIncomplete(){
+        this.complete = false;
         /*
         This function will make the Item incomplete on the ToDo List
          */
+    }
+    public String getComplete(){
+        String comp = "false";
+        if(this.complete == true)
+            comp = "true";
+        return comp;
     }
 
 
