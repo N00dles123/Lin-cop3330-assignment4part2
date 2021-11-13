@@ -59,7 +59,8 @@ public class HelloController{
     private VBox box3;
     @FXML
     private DatePicker datePicker;
-
+    @FXML
+    private Button delete;
     //This will manage all the ToDo Lists
     //ToDo masterList = new ArrayList<>();
     ToDo list = new ToDo();
@@ -155,5 +156,30 @@ public class HelloController{
             }
         }
 
+    }
+    @FXML
+    protected void onItemPicked(){
+        delete.setVisible(true);
+    }
+    @FXML
+    protected void onDeleteClick(){
+        if(options.getSelectionModel().getSelectedItem() != null){
+            list.removeItem(options.getSelectionModel().getSelectedItem().getDescription());
+            items.remove(options.getSelectionModel().getSelectedItem());
+        }
+    }
+    @FXML
+    protected void onStatusClick(){
+        if(options.getSelectionModel().getSelectedItem() != null){
+            if(options.getSelectionModel().getSelectedItem().getComplete().equals("false")){
+                list.findItem(options.getSelectionModel().getSelectedItem().getDescription()).setComplete();
+                options.getSelectionModel().getSelectedItem().setComplete();
+            }
+            else if(options.getSelectionModel().getSelectedItem().getComplete().equals("true")){
+                list.findItem(options.getSelectionModel().getSelectedItem().getDescription()).setIncomplete();
+                options.getSelectionModel().getSelectedItem().setIncomplete();
+            }
+            options.refresh();
+        }
     }
 }

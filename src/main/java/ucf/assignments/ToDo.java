@@ -40,6 +40,7 @@ public class ToDo {
         for(int i = 0; i < items.size(); i++){
             if(items.get(i).getDescription().equalsIgnoreCase(name)) {
                 foundItem = items.get(i);
+                System.out.println("found");
                 break;
             }
         }
@@ -63,7 +64,7 @@ public class ToDo {
         String path ="src\\main\\java\\ucf\\assignments\\lists\\" + this.Title + ".txt";
         try {
             File folder = new File(path);
-            PrintWriter writer = new PrintWriter(path);
+            Writer writer = new FileWriter(path);
             writer.write(this.Title+"\n");
             for(int i = 0; i < items.size(); i++){
                 writer.write(items.get(i).getDescription()+",");

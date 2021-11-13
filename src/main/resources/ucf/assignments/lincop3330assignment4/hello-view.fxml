@@ -15,7 +15,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <Label text="To-Do List Manager" />
-   <TableView fx:id="options" prefHeight="200.0" prefWidth="200.0">
+   <TableView fx:id="options" onMouseClicked="#onItemPicked" prefHeight="200.0" prefWidth="200.0">
      <columns>
          <TableColumn fx:id="complete" prefWidth="100.0" resizable="false" text="Complete" />
        <TableColumn fx:id="task" prefWidth="550.0" resizable="false" text="task" />
@@ -28,7 +28,8 @@
           <Button fx:id="hello" onAction="#onHelloButtonClick" text="Create new List" />
          <Button fx:id="uploadList" mnemonicParsing="false" onAction="#OnButtonClick" text="View Old List" />
          <Button mnemonicParsing="false" onAction="#onHelpClick" text="Help" />
-         <Button mnemonicParsing="false" text="Delete" visible="false" />
+         <Button fx:id="changestatus" mnemonicParsing="false" onAction="#onStatusClick" text="set complete/incomplete" />
+         <Button fx:id="delete" mnemonicParsing="false" onAction="#onDeleteClick" text="Delete" visible="true" />
       </children>
    </HBox>
 
