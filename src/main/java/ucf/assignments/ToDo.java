@@ -88,7 +88,7 @@ public class ToDo {
             while (in.hasNextLine()) {
                 out.add(in.nextLine());
             }
-            this.Title = out.get(0);
+            this.Title = out.get(0);f
             for(int i = 1; i < out.size(); i++){
                 System.out.println(out.get(i));
                 String[] temporary = out.get(i).split(",");
