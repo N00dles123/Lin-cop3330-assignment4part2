@@ -60,7 +60,7 @@ public class ToDo {
         purpose of this function is to save the current list to a .txt file utilizing
         the File class
          */
-        String path ="src\\main\\java\\ucf\\assignments" + this.Title + ".txt";
+        String path ="src\\main\\java\\ucf\\assignments\\lists\\" + this.Title + ".txt";
         try {
             File folder = new File(path);
             PrintWriter writer = new PrintWriter(path);
@@ -68,7 +68,7 @@ public class ToDo {
             for(int i = 0; i < items.size(); i++){
                 writer.write(items.get(i).getDescription()+",");
                 writer.write(items.get(i).getTime()+",");
-                writer.write(items.get(i).getComplete()+",");
+                writer.write(items.get(i).getComplete());
                 writer.write("\n");
             }
             writer.close();
@@ -88,8 +88,7 @@ public class ToDo {
             while (in.hasNextLine()) {
                 out.add(in.nextLine());
             }
-            String temparr = out.get(0);
-            this.Title = temparr;
+            this.Title = out.get(0);
             for(int i = 1; i < out.size(); i++){
                 System.out.println(out.get(i));
                 String[] temporary = out.get(i).split(",");
@@ -128,5 +127,9 @@ public class ToDo {
         add the complete items to it and then return that list
          */
         return complete1;
+    }
+    public void clear(){
+        this.Title = null;
+        this.items.clear();
     }
 }

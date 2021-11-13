@@ -3,6 +3,7 @@ package ucf.assignments.lincop3330assignment4;
  *  UCF COP3330 Fall 2021 Assignment 4 Solution
  *  Copyright 2021 Jason Lin
  */
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.*;
 import java.io.*;
@@ -61,7 +62,8 @@ public class HelloController{
 
     //This will manage all the ToDo Lists
     //ToDo masterList = new ArrayList<>();
-    ToDo list;
+    ToDo list = new ToDo();
+    ObservableList<Item> items = FXCollections.observableArrayList();
     @FXML
     protected void onHelloButtonClick(){
         /*
@@ -76,24 +78,27 @@ public class HelloController{
     }
     @FXML
     protected void OnButtonClick(){
+        list.clear();
+        items.clear();
+        options.getItems().clear();
         FileChooser file = new FileChooser();
         file.getExtensionFilters().add(new ExtensionFilter(".txt Files", "*.txt"));
         file.setTitle("Open File");
-        file.setInitialDirectory(new File("src\\main\\java\\ucf\\assignments"));
+        file.setInitialDirectory(new File("src\\main\\java\\ucf\\assignments\\lists"));
         File f = file.showOpenDialog(null);
-        list = new ToDo();
-        list.loadList(f);
-        ObservableList<Item> items = FXCollections.observableArrayList();
-        complete.setCellValueFactory(new PropertyValueFactory<>("complete"));
-        task.setCellValueFactory(new PropertyValueFactory<>("description"));
-        date.setCellValueFactory(new PropertyValueFactory<>("time"));
-        for(int i = 0; i < list.getItems().size(); i++) {
-            items.add(list.getItems().get(i));
+        if(f.exists()){
+            list.loadList(f);
+            complete.setCellValueFactory(new PropertyValueFactory<>("complete"));
+            task.setCellValueFactory(new PropertyValueFactory<>("description"));
+            date.setCellValueFactory(new PropertyValueFactory<>("time"));
+            for (int i = 0; i < list.getItems().size(); i++) {
+                items.add(list.getItems().get(i));
+            }
+            options.setItems(items);
+            listBox.setVisible(true);
+            hello.setVisible(false);
+            finish.setVisible(true);
         }
-        options.setItems(items);
-        listBox.setVisible(true);
-        hello.setVisible(false);
-        finish.setVisible(true);
     }
     @FXML
     protected void onSubmitClick(){
@@ -101,6 +106,12 @@ public class HelloController{
         /*this function also will utilize the function in the
         todo class to upload to a .txt file
          */
+        if(!(field.getText().isEmpty())) {
+            list.changeTitle(field.getText());
+            listBox.setVisible(true);
+            finish.setVisible(true);
+            uploadList.setVisible(true);
+        }
 
     }
     @FXML
@@ -110,6 +121,13 @@ public class HelloController{
         and afterwards list is finished displaying a finished list
         this function is to end the addition of more items to the list
          */
+        list.saveList();
+        finish.setVisible(false);
+        listBox.setVisible(false);
+        hello.setVisible(true);
+        list.clear();
+        items.clear();
+        options.getItems().clear();
     }
     @FXML
     protected void onHelpClick(){
@@ -125,12 +143,17 @@ public class HelloController{
         }
     }
     @FXML
-    protected void addToListClick(){
-        if(datePicker.hasProperties()) {
-            if(taskField.hasProperties()){
-                //Date
-                //list.addItem();
+    protected void addToListClick() throws ParseException {
+        if(datePicker.getValue() != null) {
+            if(!(taskField.getText().isEmpty())){
+                String day = datePicker.getValue().toString();
+                String task = taskField.getText();
+                list.addItem(new Item(task,day));
+                datePicker.setValue(null);
+                taskField.clear();
+                items.add(list.getItems().get(list.getItems().size()-1));
             }
         }
+
     }
 }
