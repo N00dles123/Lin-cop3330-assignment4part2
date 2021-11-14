@@ -28,9 +28,11 @@ public class HelloController{
     @FXML
     private TableView<Item> options;
     @FXML
-    private Label welcomeText;
+    private Button toList;
     @FXML
-    private VBox box;
+    private Button changestatus;
+    @FXML
+    private HBox box2;
     @FXML
     private Label listName;
     @FXML
@@ -61,10 +63,18 @@ public class HelloController{
     private DatePicker datePicker;
     @FXML
     private Button delete;
-    //This will manage all the ToDo Lists
-    //ToDo masterList = new ArrayList<>();
+    @FXML
+    private Button changeDate;
+    @FXML
+    private Button nuke;
+    @FXML
+    private Button update;
+
     ToDo list = new ToDo();
     ObservableList<Item> items = FXCollections.observableArrayList();
+
+
+    File f;
     @FXML
     protected void onHelloButtonClick(){
         /*
@@ -86,7 +96,7 @@ public class HelloController{
         file.getExtensionFilters().add(new ExtensionFilter(".txt Files", "*.txt"));
         file.setTitle("Open File");
         file.setInitialDirectory(new File("src\\main\\java\\ucf\\assignments\\lists"));
-        File f = file.showOpenDialog(null);
+        f = file.showOpenDialog(null);
         if(f.exists()){
             list.loadList(f);
             complete.setCellValueFactory(new PropertyValueFactory<>("complete"));
@@ -99,6 +109,7 @@ public class HelloController{
             listBox.setVisible(true);
             hello.setVisible(false);
             finish.setVisible(true);
+            uploadList.setVisible(false);
         }
     }
     @FXML
@@ -111,7 +122,8 @@ public class HelloController{
             list.changeTitle(field.getText());
             listBox.setVisible(true);
             finish.setVisible(true);
-            uploadList.setVisible(true);
+            field.clear();
+            box2.setVisible(false);
         }
 
     }
@@ -123,6 +135,7 @@ public class HelloController{
         this function is to end the addition of more items to the list
          */
         list.saveList();
+        uploadList.setVisible(true);
         finish.setVisible(false);
         listBox.setVisible(false);
         hello.setVisible(true);
@@ -145,14 +158,20 @@ public class HelloController{
     }
     @FXML
     protected void addToListClick() throws ParseException {
+        complete.setCellValueFactory(new PropertyValueFactory<>("complete"));
+        task.setCellValueFactory(new PropertyValueFactory<>("description"));
+        date.setCellValueFactory(new PropertyValueFactory<>("time"));
         if(datePicker.getValue() != null) {
             if(!(taskField.getText().isEmpty())){
                 String day = datePicker.getValue().toString();
+                System.out.println(day);
                 String task = taskField.getText();
                 list.addItem(new Item(task,day));
                 datePicker.setValue(null);
                 taskField.clear();
                 items.add(list.getItems().get(list.getItems().size()-1));
+                options.setItems(items);
+                options.refresh();
             }
         }
 
@@ -181,5 +200,63 @@ public class HelloController{
             }
             options.refresh();
         }
+    }
+    @FXML
+    protected void deleteList(){
+        list.clear();
+        items.clear();
+        options.refresh();
+        list.saveList();
+        hello.setVisible(true);
+        finish.setVisible(false);
+    }
+    Item ofList = null;
+    @FXML
+    protected void changeDate(){
+        if(options.getSelectionModel().getSelectedItem() != null){
+            ofList = options.getSelectionModel().getSelectedItem();
+            listBox.setVisible(true);
+            taskField.setVisible(false);
+            taskLabel.setVisible(false);
+            toList.setVisible(false);
+            changeDate.setVisible(true);
+            delete.setVisible(false);
+            changestatus.setVisible(false);
+            nuke.setVisible(false);
+            update.setVisible(false);
+        }
+    }
+    @FXML
+    protected void onChangeDate() throws ParseException {
+        list.findItem(ofList.getDescription()).setTime(datePicker.getValue().toString());
+        ofList.setTime(datePicker.getValue().toString());
+        datePicker.setValue(null);
+        changeDate.setVisible(false);
+        taskField.setVisible(true);
+        taskLabel.setVisible(false);
+        toList.setVisible(true);
+        listBox.setVisible(false);
+        changestatus.setVisible(true);
+        delete.setVisible(true);
+        nuke.setVisible(true);
+        options.refresh();
+    }
+    @FXML
+    protected void onChangeDescClick(){
+        if(options.getSelectionModel().getSelectedItem() != null){
+            ofList = options.getSelectionModel().getSelectedItem();
+            listBox.setVisible(true);
+            taskLabel.setVisible(false);
+            toList.setVisible(false);
+            changeDate.setVisible(false);
+            delete.setVisible(false);
+            changestatus.setVisible(false);
+            nuke.setVisible(false);
+            update.setVisible(true);
+        }
+    }
+    @FXML
+    protected void updateDesc(){
+
     }
 }

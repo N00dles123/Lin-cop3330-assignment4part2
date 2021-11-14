@@ -14,7 +14,7 @@ public class ToDo {
         this.items = new ArrayList<>();
     }
     public ToDo(){
-        this.Title = null;
+        this.Title = "";
         this.items = new ArrayList<>();
     }
     public ArrayList<Item> getItems(){
@@ -40,7 +40,7 @@ public class ToDo {
         for(int i = 0; i < items.size(); i++){
             if(items.get(i).getDescription().equalsIgnoreCase(name)) {
                 foundItem = items.get(i);
-                System.out.println("found");
+                //System.out.println("found");
                 break;
             }
         }
@@ -74,7 +74,7 @@ public class ToDo {
             }
             writer.close();
         }catch(Exception e){
-            System.out.println("error");
+            //System.out.println("error");
         }
     }
     /*
@@ -90,11 +90,13 @@ public class ToDo {
                 out.add(in.nextLine());
             }
             this.Title = out.get(0);
-            for(int i = 1; i < out.size(); i++){
-                System.out.println(out.get(i));
-                String[] temporary = out.get(i).split(",");
-                addItem(new Item(temporary[0],temporary[1],Boolean.parseBoolean(temporary[2])));
-                System.out.println(out.size());
+            if(out.size() >= 2) {
+                for (int i = 1; i < out.size(); i++) {
+                    //System.out.println(out.get(i));
+                    String[] temporary = out.get(i).split(",");
+                    addItem(new Item(temporary[0], temporary[1], Boolean.parseBoolean(temporary[2])));
+                    //System.out.println(out.size());
+                }
             }
         }catch(Exception e){
             System.out.println("failed");
@@ -130,7 +132,6 @@ public class ToDo {
         return complete1;
     }
     public void clear(){
-        this.Title = null;
         this.items.clear();
     }
 }
