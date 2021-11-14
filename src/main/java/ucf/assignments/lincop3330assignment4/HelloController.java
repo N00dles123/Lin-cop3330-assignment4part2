@@ -26,6 +26,8 @@ import ucf.assignments.ToDo;
 
 public class HelloController{
     @FXML
+    private HBox box1;
+    @FXML
     private TableView<Item> options;
     @FXML
     private Button toList;
@@ -69,11 +71,18 @@ public class HelloController{
     private Button nuke;
     @FXML
     private Button update;
-
+    @FXML
+    private Label dateLabel;
+    @FXML
+    private Button dueDate;
+    @FXML
+    private Button incomplete;
+    @FXML
+    private Button normal;
+    @FXML
+    private Button complete1;
     ToDo list = new ToDo();
     ObservableList<Item> items = FXCollections.observableArrayList();
-
-
     File f;
     @FXML
     protected void onHelloButtonClick(){
@@ -142,6 +151,7 @@ public class HelloController{
         list.clear();
         items.clear();
         options.getItems().clear();
+        list.changeTitle("");
     }
     @FXML
     protected void onHelpClick(){
@@ -177,10 +187,6 @@ public class HelloController{
 
     }
     @FXML
-    protected void onItemPicked(){
-        delete.setVisible(true);
-    }
-    @FXML
     protected void onDeleteClick(){
         if(options.getSelectionModel().getSelectedItem() != null){
             list.removeItem(options.getSelectionModel().getSelectedItem().getDescription());
@@ -209,6 +215,8 @@ public class HelloController{
         list.saveList();
         hello.setVisible(true);
         finish.setVisible(false);
+        uploadList.setVisible(true);
+        listBox.setVisible(false);
     }
     Item ofList = null;
     @FXML
@@ -224,22 +232,25 @@ public class HelloController{
             changestatus.setVisible(false);
             nuke.setVisible(false);
             update.setVisible(false);
+
         }
     }
     @FXML
     protected void onChangeDate() throws ParseException {
-        list.findItem(ofList.getDescription()).setTime(datePicker.getValue().toString());
-        ofList.setTime(datePicker.getValue().toString());
-        datePicker.setValue(null);
-        changeDate.setVisible(false);
-        taskField.setVisible(true);
-        taskLabel.setVisible(false);
-        toList.setVisible(true);
-        listBox.setVisible(false);
-        changestatus.setVisible(true);
-        delete.setVisible(true);
-        nuke.setVisible(true);
-        options.refresh();
+        if(datePicker.getValue() != null) {
+            list.findItem(ofList.getDescription()).setTime(datePicker.getValue().toString());
+            ofList.setTime(datePicker.getValue().toString());
+            datePicker.setValue(null);
+            changeDate.setVisible(false);
+            taskField.setVisible(true);
+            taskLabel.setVisible(false);
+            toList.setVisible(true);
+            listBox.setVisible(false);
+            changestatus.setVisible(true);
+            delete.setVisible(true);
+            nuke.setVisible(true);
+            options.refresh();
+        }
     }
     @FXML
     protected void onChangeDescClick(){
@@ -249,14 +260,70 @@ public class HelloController{
             taskLabel.setVisible(false);
             toList.setVisible(false);
             changeDate.setVisible(false);
+            dueDate.setVisible(false);
             delete.setVisible(false);
             changestatus.setVisible(false);
             nuke.setVisible(false);
+            datePicker.setVisible(false);
+            dateLabel.setVisible(false);
             update.setVisible(true);
         }
     }
+
     @FXML
     protected void updateDesc(){
-
+        if(!(taskField.getText().isEmpty())) {
+            list.findItem(ofList.getDescription()).setDescription(taskField.getText());
+            ofList.setDescription(taskField.getText());
+            taskField.clear();
+            changeDate.setVisible(false);
+            delete.setVisible(true);
+            dueDate.setVisible(true);
+            taskLabel.setVisible(true);
+            toList.setVisible(true);
+            dateLabel.setVisible(true);
+            datePicker.setVisible(true);
+            nuke.setVisible(true);
+            changestatus.setVisible(true);
+            update.setVisible(false);
+            listBox.setVisible(false);
+            options.refresh();
+        }
+    }
+    @FXML
+    protected void onNormalClick(){
+        box1.setVisible(true);
+        items.clear();
+        for(int x = 0; x < list.getItems().size(); x++) {
+            items.add(list.getItems().get(x));
+        }
+        normal.setVisible(false);
+        options.refresh();
+    }
+    @FXML
+    protected void onincompleteClick(){
+        if(list.getTitle() != "") {
+            box1.setVisible(false);
+            normal.setVisible(true);
+            ArrayList<Item> notDone = list.loadincomplete(list);
+            items.clear();
+            for (int x = 0; x < notDone.size(); x++) {
+                items.add(notDone.get(x));
+            }
+            options.refresh();
+        }
+    }
+    @FXML
+    protected void oncompleteClick(){
+        if(list.getTitle() != "") {
+            box1.setVisible(false);
+            normal.setVisible(true);
+            items.clear();
+            ArrayList<Item> done = list.loadcomplete(list);
+            for (int x = 0; x < done.size(); x++) {
+                items.add(done.get(x));
+            }
+            options.refresh();
+        }
     }
 }

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ucf.assignments.lincop3330assignment4.HelloController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="To Start you must upload an old list or create a new list with the top two buttons" />
+      <Label text="Adding an item: To add an item to the list, u must have a list created or an old list uploaded" />
+      <Label text="once you have a new list created or an old list uploaded you should be able to add to the list" />
+      <Label text="once the list is uploaded or created you can also change the date and description" />
+      <Label text="You can also clear a list once one is created or uploaded" />
+      <Label text="A list must also be uploaded or created in order to display the complete or incomplete items" />
+      <Label text="You can also change the due date but you must select an item on the table in order to" />
+   </children>
+</VBox>

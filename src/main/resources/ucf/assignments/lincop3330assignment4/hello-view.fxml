@@ -10,19 +10,26 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.lincop3330assignment4.HelloController">
+<VBox fx:id="box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" spacing="20.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.lincop3330assignment4.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
    <Label text="To-Do List Manager" />
-   <TableView fx:id="options" onMouseClicked="#onItemPicked" prefHeight="200.0" prefWidth="200.0">
+   <TableView fx:id="options" prefHeight="200.0" prefWidth="200.0">
      <columns>
          <TableColumn fx:id="complete" prefWidth="100.0" resizable="false" text="Complete" />
        <TableColumn fx:id="task" prefWidth="550.0" resizable="false" text="task" />
        <TableColumn fx:id="date" prefWidth="120.0" resizable="false" text="date" />
      </columns>
    </TableView>
-   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+   <HBox fx:id="filter" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <children>
+         <Button fx:id="complete1" mnemonicParsing="false" onAction="#oncompleteClick" text="show complete" />
+         <Button fx:id="incomplete" mnemonicParsing="false" onAction="#onincompleteClick" text="show incomplete" />
+         <Button fx:id="normal" mnemonicParsing="false" onAction="#onNormalClick" text="show normal" visible="false" />
+      </children>
+   </HBox>
+   <HBox fx:id="box1" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
       
           <Button fx:id="hello" onAction="#onHelloButtonClick" text="Create new List" />
@@ -49,10 +56,10 @@
                <TextField fx:id="taskField" />
                <Label fx:id="taskLabel" text="Task" />
                <DatePicker fx:id="datePicker" />
-               <Label text="Date" />
+               <Label fx:id="dateLabel" text="Date" />
                <Button fx:id="toList" mnemonicParsing="false" onAction="#addToListClick" text="Add to List" />
                <Button fx:id="changeDate" mnemonicParsing="false" onAction="#onChangeDate" text="change date" visible="false" />
-               <Button fx:id="update" mnemonicParsing="false" onAction="#updateDesc" text="update description" visible = "false"/>
+               <Button fx:id="update" mnemonicParsing="false" onAction="#updateDesc" text="update description" visible="false" />
             </children>
          </HBox>
       </children>
