@@ -1,53 +1,46 @@
 package ucf.assignments;
-/*
- *  UCF COP3330 Fall 2021 Assignment 4 Solution
- *  Copyright 2021 Jason Lin
- */
+
 import org.junit.jupiter.api.Test;
+
+import java.text.ParseException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ToDoTest {
 
+    ToDo list = new ToDo("food");
+    @Test
+    void getItems() throws ParseException {
+        list.addItem(new Item("laundry","2021-11-11"));
+        ArrayList<Item> testList = list.getItems();
+        assertEquals(testList.get(0).getComplete(), "false");
+    }
+
     @Test
     void getTitle() {
-        /*
-        a ToDo item will be created with a title and will be changed
-        and this will see if title is the same as the changed title
-         */
+        assertEquals(list.getTitle(),"food");
     }
 
     @Test
-    void findItem() {
-        /*
-        This will return an item from the ToDo class
-        and will be compared based on the name and date
-         */
+    void findItem() throws ParseException {
+        list.addItem(new Item("laundry","2021-11-11"));
+        Item something = list.findItem("laundry");
+        assertEquals(something.getComplete(), "false");
     }
 
     @Test
-    void loadList() {
-        /*
-        This will return or create a list based on a .csv file
-        once list is returned the first element will be compared for a test
-         */
+    void loadincomplete() throws ParseException{
+        list.addItem(new Item("laundry","2021-11-11"));
+        ArrayList<Item> incomp = list.loadincomplete(list);
+        assertEquals(incomp.get(0).getComplete(),"false");
+
     }
 
     @Test
-    void loadincomplete() {
-        /*
-        This will go through the arraylist and return an arrayList of the
-        tasks that are incomplete. Then for the test, the first item of the
-        incomplete list will be compared to a string
-         */
-    }
-
-    @Test
-    void loadcomplete() {
-        /*
-        This will go through the arraylist and return an arrayList of the
-        tasks that are complete. Then for the test, the first item of the
-        complete list will be compared to a string
-         */
+    void loadcomplete() throws ParseException{
+        list.addItem(new Item("laundry","2021-11-11"));
+        ArrayList<Item> comp = list.loadcomplete(list);
+        assertEquals(comp.size(),0);
     }
 }

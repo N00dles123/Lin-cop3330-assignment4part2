@@ -3,13 +3,14 @@
 
 class Item{
 String description;
-LocalDate time;
+Date time;
 boolean complete;
 public void setTime(String someTime)
 public String getDescription()
-public String getDate()
+public String getTime()
 public void setDescription(String descr)
 public void setComplete()
 public void setIncomplete()
+public String getComplete()
 }
 @enduml

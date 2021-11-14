@@ -7,12 +7,14 @@ String Title;
 ArrayList<Item> items;
 public void addItem(Item something)
 public void changeTitle(String nTitle)
+public ArrayList<Item> getItems()
 public String getTitle()
 public Item findItem(String name)
 public void removeItem(String name)
 public void saveList()
-public ToDo loadList(File input)
+public void loadList(File input)
 public ArrayList<Item> loadincomplete(ToDo list)
 public ArrayList<Item> loadcomplete(ToDo list)
+public void clear()
 }
 @enduml
