@@ -6,7 +6,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/*
+ *  UCF COP3330 Fall 2021 Assignment 4 Solution
+ *  Copyright 2021 Jason Lin
+ */
 class ToDoTest {
 
     ToDo list = new ToDo("food");
